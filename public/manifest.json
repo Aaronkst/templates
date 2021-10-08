@@ -1,0 +1,9 @@
+{
+  "short_name": "Kst Template",
+  "name": "Kst Template",
+  "icons": [],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

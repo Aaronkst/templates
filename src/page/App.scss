@@ -1,0 +1,24 @@
+/*Place holder sample
+
+$theme-colors: (
+    "info": tomato,
+    "danger": teal
+);*/
+
+@import "~bootstrap/scss/bootstrap";
+
+section {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.carousel-wrapper {
+    border-bottom-left-radius: 5rem;
+    border-bottom-right-radius: 5rem;
+    background-image: url('../img/background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #3f3f3f;
+    background-blend-mode: overlay;
+}
