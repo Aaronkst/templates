@@ -10,10 +10,11 @@ import { faEnvelope, faMapMarker, faSearch, faUser } from '@fortawesome/free-sol
 
 function App() {
 
-  const contentWidth = isMobile ? 'col-12' : 'col-8';
+  const contentWidth = isMobile ? 'col-sm-4' : 'col-8';
 
   const [loginModal, setLoginModal] = useState(false);
   const [searchModal, setSearchModal] = useState(false);
+  const [detailModal, setDetailModal] = useState(false);
 
   const loginClose = () => setLoginModal(false);
   const loginShow = () => setLoginModal(true);
@@ -21,16 +22,19 @@ function App() {
   const searchClose = () => setSearchModal(false);
   const searchShow = () => setSearchModal(true);
 
+  const detailClose = () => setDetailModal(false);
+  const detailOpen = () =>  setDetailModal(true);
+
   return (
     <>
     <Navbar bg="dark" variant="dark" expand="lg" className="sticky-top">
       <Container>
-        <Navbar.Brand href="#">Page Title</Navbar.Brand>
+        <Navbar.Brand href="/#">Page Title</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#">Menu 1</Nav.Link>
-            <Nav.Link href="#">Menu 2</Nav.Link>
+            <Nav.Link href="/#">Menu 1</Nav.Link>
+            <Nav.Link href="/#">Menu 2</Nav.Link>
           </Nav>
           <BrowserView>
             <Nav>
@@ -87,7 +91,7 @@ function App() {
     <div className='bg-white col-sm-6 offset-sm-3 shadow'>
       <div className='row'>
         
-        <div className={contentWidth+' py-4 mx-4'}>
+        <div className={contentWidth+' py-4 px-4'}>
           <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
             <Form.Label column>
               <span className='h4'>Properties</span>
@@ -118,7 +122,7 @@ function App() {
                     <p><span className='h6'>Price</span> - $1000</p>
                   </Card.Text>
                   <div className='text-end'>
-                    <Button variant="warning" className="text-white" target="_blank" href="#">Details &#8594;</Button>
+                    <Button variant="warning" onClick={detailOpen} className="text-white" target="_blank" href="#">Details &#8594;</Button>
                   </div>
                 </Card.Body>
               </div>
@@ -139,7 +143,7 @@ function App() {
                     <p><span className='h6'>Price</span> - $1000</p>
                   </Card.Text>
                   <div className='text-end'>
-                    <Button variant="warning" className="text-white" target="_blank" href="#">Details &#8594;</Button>
+                    <Button variant="warning" onClick={detailOpen} className="text-white" target="_blank" href="#">Details &#8594;</Button>
                   </div>
                 </Card.Body>
               </div>
@@ -160,7 +164,7 @@ function App() {
                     <p><span className='h6'>Price</span> - $1000</p>
                   </Card.Text>
                   <div className='text-end'>
-                    <Button variant="warning" className="text-white" target="_blank" href="#">Details &#8594;</Button>
+                    <Button variant="warning" onClick={detailOpen} className="text-white" target="_blank" href="#">Details &#8594;</Button>
                   </div>
                 </Card.Body>
               </div>
@@ -233,7 +237,7 @@ function App() {
           <Form.Label className='h6'>Password</Form.Label>
           <Form.Control type="password" placeholder="Password" />
         </Form.Group>
-        <p className='text-center'><small>Not a user yet? <a href='#'>Register Here</a></small></p>
+        <p className='text-center'><small>Not a user yet? <a href='/#'>Register Here</a></small></p>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="warning" className="text-white" type="submit">
@@ -268,6 +272,40 @@ function App() {
         <Modal.Footer>
           <Button variant="warning" className="text-white" type="submit">
             Search
+          </Button>
+        </Modal.Footer>
+      </Form>
+    </Modal>
+
+    <Modal show={detailModal} onHide={detailClose}>
+      <Modal.Header className='bg-dark text-white'>
+        <Modal.Title>Property Name</Modal.Title>
+      </Modal.Header>
+      <Form>
+        <Modal.Body>
+          <div className='text-center w-100'>
+            <img style={{ maxWidth: '90%' }} src={placeholderPortrait} alt="placeholder" />
+          </div>
+          <div>
+            <hr/>
+            <h6>Address</h6>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <h6>Price</h6>
+            <p>$ 1000</p>
+            <h6>Other Data</h6>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <hr />
+            <p className='h6'>Reviews</p>
+            <p><FontAwesomeIcon icon={faUser} /> <strong>User 1</strong></p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <br/>
+            <p><FontAwesomeIcon icon={faUser} /> <strong>User 2</strong></p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="warning" className="text-white" type="submit">
+            Place booking
           </Button>
         </Modal.Footer>
       </Form>
