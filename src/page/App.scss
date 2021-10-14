@@ -5,12 +5,22 @@ $theme-colors: (
     "danger": teal
 );*/
 
+@import url('https://fonts.googleapis.com/css2?family=Advent+Pro:wght@300;500&display=swap');
 @import "~bootstrap/scss/bootstrap";
 
 section {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+}
+
+.brand, .main-header {
+    font-family: 'Advent Pro', sans-serif;
+}
+
+.body {
+    background-image: url('../img/pattern.png');
+    background-attachment: fixed;
 }
 
 .carousel-wrapper {

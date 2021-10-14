@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './page/App';
 import Hotel from './page/Hotel';
+import Ecommerce from './page/Ecommerce';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
@@ -11,6 +12,7 @@ ReactDOM.render(
     <BrowserRouter>
       <Switch>
         <Route path="/hotel" component={ Hotel } />
+        <Route path="/ecommerce" component={ Ecommerce } />
         <Route path="/" component={ App } />
       </Switch>
     </BrowserRouter>

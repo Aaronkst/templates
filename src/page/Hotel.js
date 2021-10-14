@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import './App.scss';
-import './Hotel.css';
 import { Modal, Row, Form, InputGroup, FormControl, Button, Card, Navbar, Container, Nav, Carousel } from 'react-bootstrap';
-import { BrowserView, isMobile } from 'react-device-detect';
+import { BrowserView, isMobile, MobileView } from 'react-device-detect';
 import placeholder from '../img/placeholder.jpg';
 import placeholderPortrait from '../img/placeholderPortrait.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -26,15 +25,15 @@ function App() {
   const detailOpen = () =>  setDetailModal(true);
 
   return (
-    <>
+    <div className="body">
     <Navbar bg="dark" variant="dark" expand="lg" className="sticky-top">
       <Container>
-        <Navbar.Brand href="/#">Page Title</Navbar.Brand>
+        <Navbar.Brand href="/hotel/#">Page Title</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/#">Menu 1</Nav.Link>
-            <Nav.Link href="/#">Menu 2</Nav.Link>
+            <Nav.Link href="/hotel/#">Menu 1</Nav.Link>
+            <Nav.Link href="/hotel/#">Menu 2</Nav.Link>
           </Nav>
           <BrowserView>
             <Nav>
@@ -92,6 +91,10 @@ function App() {
       <div className='row'>
         
         <div className={contentWidth+' py-4 px-4'}>
+          <MobileView className="text-end">
+            <Button variant='secondary' onClick={loginShow} className='mx-2'><FontAwesomeIcon icon={faUser} /> Login</Button>
+            <Button variant='warning' onClick={searchShow} className='text-white mx-2'><FontAwesomeIcon icon={faSearch} /> Search</Button>
+          </MobileView>
           <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
             <Form.Label column>
               <span className='h4'>Properties</span>
@@ -182,7 +185,7 @@ function App() {
         </div>
         
         <BrowserView className='col py-4'>
-          <h4>Filter</h4>
+          <h4>Search</h4>
           <Form>
             <div className='col w-100' style={{paddingRight: '1rem'}}>
               <h6>Price Range</h6>
@@ -216,15 +219,17 @@ function App() {
       </div>
     </div>
 
-    <div className='bg-dark w-100 absolute-bottom'>
+    <div className='bg-dark w-100'>
       <div className='col-sm-6 offset-sm-3 text-center py-3'>
         <p className='text-white'>Contact Us</p>
         <p className="text-warning"><FontAwesomeIcon icon={faEnvelope} /> John.Smith@example.com | <FontAwesomeIcon icon={faMapMarker} /> Office Address</p>
+        <br />
+        <p><small className="text-light">© Powered by <span className="brand">addTech</span></small></p>
       </div>
     </div>
 
     <Modal show={loginModal} onHide={loginClose}>
-      <Modal.Header className='bg-dark text-white'>
+      <Modal.Header className='bg-secondary text-white' closeButton>
         <Modal.Title>Login</Modal.Title>
       </Modal.Header>
       <Form>
@@ -237,7 +242,7 @@ function App() {
           <Form.Label className='h6'>Password</Form.Label>
           <Form.Control type="password" placeholder="Password" />
         </Form.Group>
-        <p className='text-center'><small>Not a user yet? <a href='/#'>Register Here</a></small></p>
+        <p className='text-center'><small>Not a user yet? <a className="text-decoration-none" href='/hotel/#'>Register Here &rarr;</a></small></p>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="warning" className="text-white" type="submit">
@@ -248,43 +253,85 @@ function App() {
     </Modal>
 
     <Modal show={searchModal} onHide={searchClose}>
-      <Modal.Header className='bg-dark text-white'>
+      <Modal.Header className='bg-secondary text-white' closeButton>
         <Modal.Title>Search</Modal.Title>
       </Modal.Header>
-      <Form>
-        <Modal.Body>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label className='h6'>Property Name</Form.Label>
-          <Form.Control type="text" placeholder="Property Name" />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label className='h6'>Address</Form.Label>
-          <Form.Select name='address' className='mb-2'>
-            <option>Township, City</option>
-            <option>Township 2, City 2</option>
-          </Form.Select>
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label className='h6'>Rooms</Form.Label>
-          <FormControl name='maxPrice' type="number" placeholder="4" />
-        </Form.Group>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="warning" className="text-white" type="submit">
-            Search
-          </Button>
-        </Modal.Footer>
-      </Form>
+      <Modal.Body>
+        <Form>
+          <div className='col w-100'>
+            <h6>Price Range</h6>
+            <InputGroup className="mb-2">
+              <InputGroup.Text style={{width: '30%'}}>From</InputGroup.Text>
+              <FormControl name='minPrice' type="number" placeholder="" value="0" />
+            </InputGroup>
+            <InputGroup className="mb-2">
+              <InputGroup.Text style={{width: '30%'}}>To</InputGroup.Text>
+              <FormControl name='maxPrice' type="number" placeholder="" value="1000" />
+            </InputGroup>
+            <h6>Address</h6>
+            <Form.Select name='address' className='mb-2'>
+              <option>Township, City</option>
+              <option>Township 2, City 2</option>
+            </Form.Select>
+            <h6>Rooms</h6>
+            <InputGroup className="mb-2">
+              <InputGroup.Text style={{width: '30%'}}>Rooms</InputGroup.Text>
+              <FormControl name='maxPrice' type="number" placeholder="" value="4" />
+            </InputGroup>
+            <Row className='text-end'>
+              <div className='col mt-2'>
+                <Button variant='warning' className='text-white'>Apply</Button>
+              </div>
+            </Row>
+          </div>
+        </Form>
+      </Modal.Body>
     </Modal>
 
-    <Modal show={detailModal} onHide={detailClose}>
-      <Modal.Header className='bg-dark text-white'>
+    <Modal size="lg" show={detailModal} onHide={detailClose}>
+      <Modal.Header className='bg-secondary text-white' closeButton>
         <Modal.Title>Property Name</Modal.Title>
       </Modal.Header>
       <Form>
         <Modal.Body>
-          <div className='text-center w-100'>
-            <img style={{ maxWidth: '90%' }} src={placeholderPortrait} alt="placeholder" />
+          <div className='mx-auto w-75'>
+            <Carousel>
+              <Carousel.Item>
+                <img
+                  className="d-block w-100"
+                  src={placeholder}
+                  alt="First slide"
+                />
+                <Carousel.Caption>
+                  <h3>Sea side View</h3>
+                  <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                </Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item>
+                <img
+                  className="d-block w-100"
+                  src={placeholder}
+                  alt="Second slide"
+                />
+
+                <Carousel.Caption>
+                  <h3>Interior View</h3>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item>
+                <img
+                  className="d-block w-100"
+                  src={placeholder}
+                  alt="Third slide"
+                />
+
+                <Carousel.Caption>
+                  <h3>Bathroom</h3>
+                  <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                </Carousel.Caption>
+              </Carousel.Item>
+            </Carousel>
           </div>
           <div>
             <hr/>
@@ -311,7 +358,7 @@ function App() {
       </Form>
     </Modal>
 
-    </>
+    </div>
   );
 }
 
