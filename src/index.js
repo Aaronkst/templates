@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './page/App';
 import Hotel from './page/Hotel';
 import Ecommerce from './page/Ecommerce';
+import Cms from './page/CMS/Cms';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
@@ -13,6 +14,7 @@ ReactDOM.render(
       <Switch>
         <Route path="/hotel" component={ Hotel } />
         <Route path="/ecommerce" component={ Ecommerce } />
+        <Route path="/cms" component={ Cms } />
         <Route path="/" component={ App } />
       </Switch>
     </BrowserRouter>

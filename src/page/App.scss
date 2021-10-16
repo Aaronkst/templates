@@ -14,6 +14,15 @@ section {
     min-height: 100vh;
 }
 
+.nav-wrap {
+    height: 100vh;
+}
+
+.scrollable {
+    height: 30vh;
+    overflow-y: auto;
+}
+
 .brand, .main-header {
     font-family: 'Advent Pro', sans-serif;
 }

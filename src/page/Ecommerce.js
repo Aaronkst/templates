@@ -111,7 +111,7 @@ function App() {
   return (
     <>
     <section className='ecommerce-header'>
-      <Navbar bg="dark" variant="dark" fixed="top" expand="lg" className="shadow">
+      <Navbar bg="dark" variant="dark" expand="lg" className="shadow">
         <Container>
           <Navbar.Brand href="/ecommerce/#">Page Title</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />

@@ -22,7 +22,7 @@ function App() {
                 </ul>
               </Card.Text>
               <div className='text-end'>
-                <Button variant="warning" className="text-white" target="_blank" href="/hotel">Preview &#8594;</Button>
+                <Button variant="warning" className="text-white" target="_blank" href="/hotel/">Preview &#8594;</Button>
               </div>
             </Card.Body>
           </Card>
@@ -39,7 +39,7 @@ function App() {
                 </ul>
               </Card.Text>
               <div className='text-end'>
-                <Button variant="warning" className="text-white" target="_blank" href="/ecommerce">Preview &#8594;</Button>
+                <Button variant="warning" className="text-white" target="_blank" href="/ecommerce/">Preview &#8594;</Button>
               </div>
             </Card.Body>
           </Card>
@@ -57,7 +57,7 @@ function App() {
                 </ul>
               </Card.Text>
               <div className='text-end'>
-                <Button variant="warning" className="text-white" target="_blank" href="/cms">Preview &#8594;</Button>
+                <Button variant="warning" className="text-white" target="_blank" href="/cms/">Preview &#8594;</Button>
               </div>
             </Card.Body>
           </Card>
