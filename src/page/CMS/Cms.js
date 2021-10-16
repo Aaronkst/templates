@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import '../App.scss';
 import { Chart } from 'react-charts';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { Accordion, Button, Form, Row, Col, Table, Navbar, Container, Nav, NavDropdown, Pagination } from 'react-bootstrap';
+import { Redirect, Switch, Route, Link, HashRouter } from 'react-router-dom';
+import { Button, Form, Row, Col, Table, Navbar, Container, Nav, NavDropdown, Pagination } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTachometerAlt, faUser, faList, faFileExcel, faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faTachometerAlt, faUser, faFileExcel, faSearch } from '@fortawesome/free-solid-svg-icons'
 
 function Time() {
 
@@ -38,10 +38,10 @@ function Layout(props) {
       <div style={{display: "flex"}}>
         <div className="bg-dark col-1 text-justify nav-wrap pt-3">
           <Nav defaultActiveKey="/cms/" className="flex-column">
-            <Nav.Link className="text-white" href="/cms/"><FontAwesomeIcon icon={faTachometerAlt} /> Dashboard</Nav.Link>
-            <Nav.Link className="text-white" href="/cms/menu"><FontAwesomeIcon icon={faUser} /> Customer</Nav.Link>
-            <Nav.Link className="text-white" href="/cms/user" eventKey="/cms/user"><FontAwesomeIcon icon={faUser} /> User</Nav.Link>
-            <Nav.Link className="text-white" href="/cms/report" eventKey="/cms/report"><FontAwesomeIcon icon={faFileExcel} /> Report</Nav.Link>
+            <Nav.Link><Link to='/cms/' className="text-white text-decoration-none"><FontAwesomeIcon icon={faTachometerAlt} /> Dashboard</Link></Nav.Link>
+            <Nav.Link><Link to='/cms/menu' className="text-white text-decoration-none"><FontAwesomeIcon icon={faUser} /> Customer</Link></Nav.Link>
+            <Nav.Link><Link to='/cms/user' className="text-white text-decoration-none"><FontAwesomeIcon icon={faUser} /> User</Link></Nav.Link>
+            <Nav.Link><Link to='/cms/report' className="text-white text-decoration-none"><FontAwesomeIcon icon={faFileExcel} /> Report</Link></Nav.Link>
           </Nav>
         </div>
         <div className="col">
@@ -58,7 +58,7 @@ function Layout(props) {
             </Container>
           </Navbar>
           <div className="px-5 pt-3">
-          {props.children}
+          <App />
           </div>
         </div>
       </div>
@@ -499,24 +499,36 @@ function Report() {
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Switch>
-          <Route path="/cms/menu">
-            <Layout><Menu /></Layout>
-          </Route>
-          <Route path="/cms/user">
-            <Layout><User /></Layout>
-          </Route>
-          <Route path="/cms/report">
-            <Layout><Report /></Layout>
-          </Route>
-          <Route path="/cms/">
-            <Layout><Dashboard /></Layout>
-          </Route>
-        </Switch>
-      </BrowserRouter>
+      <Switch>
+        <Route
+        path="/cms/menu"
+        name="menu"
+        render={props => (
+            <Menu {...props} />
+        )} />
+        <Route
+        path="/cms/user"
+        name="user"
+        render={props => (
+            <User {...props} />
+        )} />
+        <Route
+        path="/cms/report"
+        name="report"
+        render={props => (
+            <Report {...props} />
+        )} />
+        <Route
+        path="/cms/dashboard"
+        name="dashboard"
+        exact={true}
+        render={props => (
+            <Dashboard {...props} />
+        )} />
+        <Redirect from="/" to="/cms/dashboard" />
+      </Switch>
     </>
   );
 }
 
-export default App;
+export default Layout;
